@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stack URL - 設定</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Stack URL 設定</h1>
+    </header>
+
+    <div id="error-msg" class="error hidden"></div>
+    <div id="success-msg" class="success hidden"></div>
+
+    <section class="section">
+      <h2>GitHub 設定</h2>
+      <div class="field">
+        <label for="github-token">GitHub Token</label>
+        <input type="password" id="github-token" placeholder="ghp_xxxxxxxxxxxx">
+        <p class="hint">repo または public_repo スコープのPATを使用してください</p>
+      </div>
+      <div class="field">
+        <label for="github-owner">GitHub Owner</label>
+        <input type="text" id="github-owner" placeholder="username">
+      </div>
+      <div class="field">
+        <label for="github-repo">GitHub Repo</label>
+        <input type="text" id="github-repo" placeholder="reading-list">
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>エスカレーション設定</h2>
+      <div class="field">
+        <div class="toggle-row">
+          <label for="escalation-enabled">エスカレーション通知</label>
+          <label class="toggle">
+            <input type="checkbox" id="escalation-enabled">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="threshold-days">閾値（日数）</label>
+        <input type="number" id="threshold-days" min="1" max="365" value="3">
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>通知設定</h2>
+      <div class="field">
+        <div class="toggle-row">
+          <label for="discord-enabled">Discord通知</label>
+          <label class="toggle">
+            <input type="checkbox" id="discord-enabled">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="discord-webhook-url">Discord Webhook URL</label>
+        <input type="text" id="discord-webhook-url" placeholder="https://discord.com/api/webhooks/...">
+      </div>
+      <div class="field">
+        <div class="toggle-row">
+          <label for="browser-notification-enabled">ブラウザ通知</label>
+          <label class="toggle">
+            <input type="checkbox" id="browser-notification-enabled">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button id="save-btn" class="btn btn-primary">設定を保存</button>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

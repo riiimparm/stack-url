@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stack URL</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Stack URL</h1>
+      <a href="#" id="options-link" title="設定">⚙</a>
+    </header>
+
+    <div id="error-msg" class="error hidden"></div>
+    <div id="success-msg" class="success hidden"></div>
+
+    <section class="add-section">
+      <div class="current-url">
+        <div class="label">現在のページ</div>
+        <div id="current-title" class="title-text"></div>
+        <div id="current-url-text" class="url-text"></div>
+      </div>
+      <div class="priority-select">
+        <label for="priority">優先度:</label>
+        <select id="priority">
+          <option value="priority:high">High</option>
+          <option value="priority:mid" selected>Mid</option>
+          <option value="priority:low">Low</option>
+        </select>
+      </div>
+      <button id="add-btn" class="btn btn-primary">登録する</button>
+    </section>
+
+    <section class="list-section">
+      <div class="list-header">
+        <h2>リーディングリスト</h2>
+        <button id="refresh-btn" class="btn-icon" title="更新">↻</button>
+      </div>
+      <div id="issues-container">
+        <div class="loading">読み込み中...</div>
+      </div>
+    </section>
+  </div>
+
+  <script src="../lib/github.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
