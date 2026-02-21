@@ -1,23 +1,52 @@
 // バックグラウンド処理・エスカレーション監視
 
-importScripts('../lib/github.js', '../lib/discord.js', '../lib/escalation.js');
+importScripts('../lib/crypto.js', '../lib/github.js', '../lib/discord.js', '../lib/escalation.js');
 
 const ALARM_NAME = 'escalation-check';
 
-// 設定を取得
+// 設定を取得し、暗号化済みフィールドを復号して返す
 async function getSettings() {
-  return new Promise((resolve) => {
-    chrome.storage.sync.get([
-      'github_token',
+  const data = await new Promise((resolve) => {
+    chrome.storage.local.get([
+      'github_token_enc',
       'github_owner',
       'github_repo',
       'escalation_enabled',
       'escalation_threshold_days',
       'discord_enabled',
-      'discord_webhook_url',
+      'discord_webhook_url_enc',
       'browser_notification_enabled'
     ], resolve);
   });
+
+  let github_token = '';
+  if (data.github_token_enc) {
+    try {
+      github_token = await CryptoUtils.decrypt(data.github_token_enc);
+    } catch (err) {
+      console.error('GitHubトークン復号エラー:', err);
+    }
+  }
+
+  let discord_webhook_url = '';
+  if (data.discord_webhook_url_enc) {
+    try {
+      discord_webhook_url = await CryptoUtils.decrypt(data.discord_webhook_url_enc);
+    } catch (err) {
+      console.error('Discord Webhook URL復号エラー:', err);
+    }
+  }
+
+  return {
+    github_token,
+    github_owner: data.github_owner,
+    github_repo: data.github_repo,
+    escalation_enabled: data.escalation_enabled,
+    escalation_threshold_days: data.escalation_threshold_days,
+    discord_enabled: data.discord_enabled,
+    discord_webhook_url,
+    browser_notification_enabled: data.browser_notification_enabled
+  };
 }
 
 // 通知済みIssue番号を取得

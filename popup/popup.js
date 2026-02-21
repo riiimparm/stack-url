@@ -1,14 +1,21 @@
 // ポップアップのメインロジック
 
-// 設定をchrome.storage.syncから取得
+// 設定をchrome.storage.localから取得し、暗号化済みトークンを復号して返す
 async function getSettings() {
-  return new Promise((resolve) => {
-    chrome.storage.sync.get([
-      'github_token',
-      'github_owner',
-      'github_repo'
-    ], resolve);
+  const data = await new Promise((resolve) => {
+    chrome.storage.local.get(['github_token_enc', 'github_owner', 'github_repo'], resolve);
   });
+
+  let github_token = '';
+  if (data.github_token_enc) {
+    try {
+      github_token = await CryptoUtils.decrypt(data.github_token_enc);
+    } catch (err) {
+      console.error('GitHubトークン復号エラー:', err);
+    }
+  }
+
+  return { github_token, github_owner: data.github_owner, github_repo: data.github_repo };
 }
 
 // エラー表示
