@@ -1,8 +1,14 @@
 # Stack URL
 
+<img width="382" height="386" alt="スクリーンショット 2026-03-05 1 40 12" src="https://github.com/user-attachments/assets/e2ba4bcd-859f-4cf9-a20f-51d9bb0b126d" />
+
+
 「あとで読む」が、ちゃんと読まれるようになる Chrome 拡張機能。
 
 気になったページを GitHub Issue として積んでおき、放置しすぎたら Discord やブラウザ通知で督促してくれます。
+
+<img height="200" src="https://github.com/user-attachments/assets/44f4e2fe-8209-4de2-855d-192682fbf75f" />
+
 
 ブログ[【僕がClaude Codeを従えるまで】1日目 CLAUDE.md](https://www.rowicy.com/blog/master-claude-code-day1/)内で作成
 
